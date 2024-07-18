@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2024 at 01:22 PM
+-- Generation Time: Jul 18, 2024 at 05:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -123,7 +123,7 @@ CREATE TABLE `customers` (
   `email` varchar(500) DEFAULT NULL,
   `phone` varchar(500) DEFAULT NULL,
   `password` varchar(500) NOT NULL,
-  `google_id` varchar(500) NOT NULL,
+  `google_id` varchar(500) DEFAULT NULL,
   `api_token` varchar(500) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -140,8 +140,8 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `password`, `google_id`, `api_token`, `created_at`, `updated_at`, `status`, `fcm`, `notification`, `image_url`) VALUES
 (1, 'اوس راسم جميل', 'test3@gmail.com', '07715623061', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTcyXC9Sb3lhbEpvYlwvcHVibGljXC9TZWNyZXRSb3lhbEZpcnN0ZXJcL2xvZ2luIiwiaWF0IjoxNjQ3NDIxMjM3LCJleHAiOjE2NDc0MjQ4MzcsIm5iZiI6MTY0NzQyMTIzNywianRpIjoiRDE4SVNOTmptUWt1MU9HQSIsInN1YiI6ImN1c3RvbWVyczQzYjUzNTVlMmY5YjFiYjY3NjFjMzM4ZjY2ODE5OTMzX1JveWFsQm9hcmQiLCJwcnYiOiI4MjJkZjIwZWExZjA3NTcwNzEzNTgxYzI3MjI4ZWE0ZGUyZTZlNWFmIn0.URIS2rGgYCaYXBbOTo1TcI7vKQtpySJbgwL0vS6xlW0', '2021-10-17 21:59:23', '2022-03-16 19:00:37', 1, 'dHHCoh0zQK25XrDn9wLeSy:APA91bER_z0HZOTdcDIzMfLSFb1PUMzQrI-mP6L2KvQQ4Nzd3nb1TuvRitINGWpOgB-CZZHAGdIhvvH8M3h3WZnc9haXsgGv6YMuewp28FtC9OGJPZVARFpERkEpwh3zHUKW7JxYEoyy', 1, NULL),
 (2, ' محمد راسم جميل', 'test1@gmail.com', '078534234520', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL215X2dvbGRcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9sb2dpbiIsImlhdCI6MTY1MDA1MTU0NiwiZXhwIjoxNjUwMDU1MTQ2LCJuYmYiOjE2NTAwNTE1NDYsImp0aSI6ImdJQ1Bzb3pvS0VoajRlVTEiLCJzdWIiOiJjdXN0b21lcnM0M2I1MzVmc2RmZjliMWJiNjc2MWMzMzhmNjY4MTk5MzNfUm95YWxCb2FyZCIsInBydiI6IjUzYTJjYjEyZDZlNTEyZDY3OGRhNGU5YzE0MWE0YWI5MTYxM2E4YjcifQ.OEaon5ZPHhzQ-EWD_6Z7D11YXzlrraRElKV_YuyprsI', '2021-10-17 21:59:23', '2022-04-16 02:39:06', 1, 'dHHCoh0zQK25XrDn9wLeSy:APA91bER_z0HZOTdcDIzMfLSFb1PUMzQrI-mP6L2KvQQ4Nzd3nb1TuvRitINGWpOgB-CZZHAGdIhvvH8M3h3WZnc9haXssdfgGv6YMuewp28FtC9OGJPZVARFpERkEpwh3zHUKW7JxYEoyy', 1, NULL),
-(3, 'Azel Mohammed', 'ft47fc@gmail.com', '+9642', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTg4XC9zdXBlcm1hblwvcHVibGljXC9Sb3lhbEZpcnN0ZXJcL2xvZ2luIiwiaWF0IjoxNjc0NzQzNDEwLCJleHAiOjE2NzQ3NDcwMTAsIm5iZiI6MTY3NDc0MzQxMCwianRpIjoidDlkQzQyTXpDSWZFaUZpTiIsInN1YiI6IlJveWFsQm9hcmRfZ29vZ2xlX0N1c3RvbWVyXzEwMTQyOTAyNTE1NTkwMzY3NTEyNiIsInBydiI6IjUzYTJjYjEyZDZlNTEyZDY3OGRhNGU5YzE0MWE0YWI5MTYxM2E4YjcifQ.wIzoAYI9t4Upyv-nkmUs_IkqDmAmF87oxYIHs63VT50', '2022-04-14 04:28:54', '2023-01-26 22:30:10', 1, NULL, 1, 'https://lh3.googleusercontent.com/a-/AOh14GgaSDdX9f3k-WbS0B1RfimvyYoxcKETEbAA98yH=s96-c'),
-(5, NULL, NULL, '+9647807832184', '$2y$10$Mi2Tpu33wVnOZUXIdWYrDOCtzHIXroxNRdFTpOcCbNalFij7VEnL2', 'a1RG6krfGlbuYWFF2opOnRbS4M43', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTg4XC9zdXBlcm1hblwvcHVibGljXC9Sb3lhbEZpcnN0ZXJcL2xvZ2luIiwiaWF0IjoxNjc0ODUxNjUwLCJleHAiOjE2NzQ4NTUyNTAsIm5iZiI6MTY3NDg1MTY1MCwianRpIjoiVmJ2Wkg0bUFvR3dIWnJ0aSIsInN1YiI6NSwicHJ2IjoiNTNhMmNiMTJkNmU1MTJkNjc4ZGE0ZTljMTQxYTRhYjkxNjEzYThiNyJ9.2wNaSVPk5MGxLOOtC4d1YtVaMg1dpBRXFD2LZFVkJxE', '2023-01-28 04:29:57', '2023-01-28 04:34:11', 1, NULL, 1, NULL);
+(3, 'Azel Mohammed', 'ft47fc@gmail.com', '+9642', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTkwXC9kZXZcL2dlbmVyYWxcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9sb2dpbiIsImlhdCI6MTcxODA3Mzc2NSwiZXhwIjoxNzE4MDc3MzY1LCJuYmYiOjE3MTgwNzM3NjUsImp0aSI6IklMQldKYnY3WVFldVBhcjYiLCJzdWIiOjMsInBydiI6IjUzYTJjYjEyZDZlNTEyZDY3OGRhNGU5YzE0MWE0YWI5MTYxM2E4YjcifQ.PXjWG1W9MNV7LoN76wsWLU38e2BY5HrJiGvkR8AFMZw', '2022-04-14 04:28:54', '2024-06-10 23:42:45', 1, NULL, 1, 'https://lh3.googleusercontent.com/a-/AOh14GgaSDdX9f3k-WbS0B1RfimvyYoxcKETEbAA98yH=s96-c'),
+(10, 'test', NULL, '+9647807832184', '$2y$10$4QsRtiNgyYUs7gGj2qvkx.EZOgImp4l/uWPZqE0Czp647kyqzipHK', NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTkwXC9kZXZcL2dlbmVyYWxcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9mb3JnZXQiLCJpYXQiOjE3MTgwNzM5MDYsImV4cCI6MTcxODA3NzUwNiwibmJmIjoxNzE4MDczOTA2LCJqdGkiOiJWblAzS0g4U0FHMkhmc2hpIiwic3ViIjoxMCwicHJ2IjoiNTNhMmNiMTJkNmU1MTJkNjc4ZGE0ZTljMTQxYTRhYjkxNjEzYThiNyJ9.HiY7vYcaxGkhRQz2wwHhuPxcfoS4b63st3Z0HTnCfLI', '2024-06-10 23:43:37', '2024-06-10 23:45:06', 1, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,6 +183,24 @@ INSERT INTO `image` (`id`, `type`, `father_model`, `path`, `created_at`, `update
 (95, 'category', '20', 'image_category_84a541d8bb7808a1c44e659df584033b.png', '2023-07-10 00:04:10', '2023-07-10 00:04:10'),
 (96, 'category', '12', 'image_category_d0c04c893a221673eb5b9f3528cbe419.png', '2023-07-10 00:05:08', '2023-07-10 00:05:08'),
 (97, 'category', '28', 'image_category_f46bb1a9d3fdf5e85006c28328dd57e9.jpg', '2024-05-17 16:57:58', '2024-05-17 16:57:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `model_type` varchar(150) DEFAULT NULL,
+  `model_id` int(11) DEFAULT NULL,
+  `title` varchar(300) NOT NULL,
+  `body` text DEFAULT NULL,
+  `type` varchar(100) NOT NULL,
+  `metadata` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -291,6 +309,14 @@ ALTER TABLE `image`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `model_type` (`model_type`),
+  ADD KEY `model_id` (`model_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -335,13 +361,19 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shop`
