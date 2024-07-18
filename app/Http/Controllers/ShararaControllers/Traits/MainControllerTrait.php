@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\isEmpty;
 
-
  trait MainControllerTrait{
     static protected $requestError="هذا الطلب غير صحيح";
     static protected $youAreNotAuthenticated="انت غير مرخص";
     static protected $validatorError="يجب التأكد من صحة جميع الحقول";
     static protected $RoyalCatchEror="يرجى المحاولة فيما بعد";
-
     static function standardValidation($i,$variables,$function="EM"){
         $conditions=array();
         foreach($variables as $v){
@@ -21,7 +19,7 @@ use function PHPUnit\Framework\isEmpty;
             else $conditions[$v]="required";
         }
         $v=Validator::make($i,$conditions);
-        if($v->fails())return parent::$function(parent::$validatorError);
+        if($v->fails())return $v->getMessageBag()->first();
     }
 
     static function EM($message,$route=null){
@@ -306,5 +304,7 @@ trait QueryFilterTrati {
         }
     }
 }
+
+
 
 ?>

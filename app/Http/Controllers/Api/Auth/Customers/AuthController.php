@@ -9,7 +9,6 @@ use App\Models\System\Customer\Customer;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Claims\Custom;
 
 class AuthController extends ApiFunctionsController
 {
@@ -18,7 +17,6 @@ class AuthController extends ApiFunctionsController
     function register(request $request){
 
 
-        return $this->eToast("hi");
         $i=$request->all();
        $v=CustomerValidator::registerValidator($i,Customer::class);
        if($v)return $this->eToast($v);
@@ -65,8 +63,23 @@ class AuthController extends ApiFunctionsController
     
 
     function login(request $request){
+
+
+        return $this->eToast("test");
         $v=$this->standardValidation($request->all(),['phone','password'],'eToast');
         if($v)return $v;
+        return $this->loginProccess($request);
+    }
+
+
+    public function forget(request $request){
+        $phone = $request->get('phone');
+        $password = $request->get('password');
+        $customer = Customer::where('phone',$phone)->first();
+        if($customer==null)return $this->eToast("لا يوجد حساب بهذا رقم الهاتف");
+        $customer->password = Hash::make($password);
+        $saver = $customer->saver();
+        if($saver)return $this->eToast($saver);
         return $this->loginProccess($request);
     }
 
@@ -77,8 +90,7 @@ class AuthController extends ApiFunctionsController
         if($token==null)return $this->eToast("البريد الالكتروني او كلمة السر غير صحيحات");
         $customer= $auth->user();
         $customer->api_token=$token;
-        if($customer->save())
-        return $this->SR("auth",$customer->fullResponse(),"تم تسجيل الدخول بنجاح");
+        if($customer->save())return $this->SR("auth",$customer->fullResponse(),"تم تسجيل الدخول بنجاح");
        }catch(Exception $e){
            return $this->eToast(parent::$RoyalCatchEror);
        }

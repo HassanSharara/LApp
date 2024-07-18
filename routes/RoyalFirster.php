@@ -25,6 +25,7 @@ Route::post("RoyalAppSigningDebugEvent",[AppMonitorController::class,'create']);
 
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
+Route::post('forget',[AuthController::class,'forget']);
 Route::post('loginByGoogle',[AuthController::class,'loginByGoogle']);
 
 

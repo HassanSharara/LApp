@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RoyalBoardModel extends Model
 {
@@ -61,18 +63,41 @@ class RoyalBoardModel extends Model
 
 
 
-    public function saver(){return $this->RoyalModelSaving();}
-    public function RoyalModelSaving(){
+    public function saver():string|null{return $this->RoyalModelSaving();}
+    public function RoyalModelSaving():string|null{
       try{
         $this->save();
         return null;
       }
       catch(QueryException $e){
+       if( $e->getCode() == 23000 )return "هنلك قيمة متكررة و موجدة مسبقاً  ";
         return $e->getMessage();
       }
       catch(Exception $e){
         return $e->getMessage();
       }}
 
+
+      public function saveAllIncomeDataFromColumnKey(Request &$request,$checker = null):string | null{
+        $data = $request->get('column');
+        if(!is_array($data))return "there is no data";
+        foreach($data as $column => $value){
+          if($checker!=null){
+            $ch = $checker($column,$value);
+            if($ch!=null)return $ch;
+          }
+          if(str_contains($column,'password')){
+            $value = Hash::make($value);
+          }
+          $this->$column = $value;
+        }
+        return $this->saver();
+      }
+
+
+      public function fullResponse(){
+        if($this->hasImage)$this->images;
+        return $this;
+      }
     /// Royal Board End Changes
 }

@@ -2,15 +2,14 @@
 
 namespace App\Models\System\Customer;
 
+use App\Models\RoyalBoardModel\RoyalUserModel\RoyalUserModel as RAUTH;
 use App\Models\System\Shop\Shop;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\RoyalBoardUser as RoyalAuthenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-class Customer extends RoyalAuthenticatable implements JWTSubject
+class Customer extends RAUTH implements JWTSubject
 {
     use HasFactory;
     use Notifiable;
@@ -48,3 +47,4 @@ class Customer extends RoyalAuthenticatable implements JWTSubject
        return $this;
     }
 }
+
