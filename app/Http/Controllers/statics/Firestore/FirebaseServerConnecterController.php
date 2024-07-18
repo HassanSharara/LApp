@@ -5,7 +5,7 @@ namespace App\Http\Controllers\statics\Firestore;
 use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\Contract\Messaging;
+use Kreait\Firebase\Messaging;
 
 class FirebaseServerConnecterController 
 {
