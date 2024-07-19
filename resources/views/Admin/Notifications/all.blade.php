@@ -6,9 +6,8 @@
     <?php
 
 use App\Models\SystemModels\Notifications\Notifications;
-
+use App\Http\Controllers\Files\Image\ImageController;
     $counter=1;
-    $model=Notifications::where('type','general')->orderby('created_at','desc')->paginate();
 
     ?>
     <section class="section">
@@ -29,7 +28,9 @@ use App\Models\SystemModels\Notifications\Notifications;
                                     <tr>
                                         <th>التسلسل </th>
                                         <th>عنوان الاشعار</th>
+                                        <th>الصورة </th>
                                         <th>تفاصيل الاشعار</th>
+                                        <th>تعديل </th>
                                         <th>حذف</th>
                                        
                                     </tr>
@@ -37,8 +38,17 @@ use App\Models\SystemModels\Notifications\Notifications;
 
                                         <td>{{$counter++}}</td>
                                         <td>{{$obj->title}}</td>
+                                        <?php 
+                                         $images  = $obj->images;
+                                        ?>
+                                        <td> 
+                                            @if(!empty($images))
+                                            <img class="img-responsive imgcover" src="{{asset(ImageController::$uploadPath.'/'.$obj->images->first()->path)}}">                                            
+                                            @endif
+                                        </td>
                                         <td>{{$obj->body}}</td>
-                                        <td><a href="{{Route('notifications_delete',['id'=>$obj->id])}}" class="btn btn-danger">حذف</a></td>
+                                        <td><a href="{{Route('edit_notifications',['id'=>$obj->id])}}" class="btn btn-primary">تعديل</a></td>
+                                        <td><a href="{{Route('delete_notifications',['id'=>$obj->id])}}" class="btn btn-danger">حذف</a></td>
                                         </tr>
                                     @endforeach
                                 </table>

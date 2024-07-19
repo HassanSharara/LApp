@@ -30,11 +30,15 @@
 
                                         </ul>
                                     </li>
-
                                     <li class="dropdown">
-                                    <a href="{{Route('orders')}}" class="nav-link"><i data-feather="box"></i><span>الطلبات</span></a>
+                                        <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                                                data-feather="bell"></i><span>الاشعارات </span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="nav-link" href="{{Route('create_notifications')}}">انشاء اشعار جديد </a></li>
+                                            <li><a class="nav-link" href="{{Route('all_notifications')}}">جميع الاشعارات</a></li>
 
-                                      </li>
+                                        </ul>
+                                    </li>
                                     <!-- <li class="dropdown">
                 <a href="{{Route('app_monitor')}}" class="nav-link"><i data-feather="monitor"></i><span>نظام مراقبة الاخطاء</span></a>
 

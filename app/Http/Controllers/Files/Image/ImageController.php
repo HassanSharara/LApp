@@ -14,7 +14,7 @@ class ImageController extends Controller
     
   static public $uploadPath="uploads/files/images";
 
-   static function createWebImage(Request $request,Model $model,$forceValidation=true){
+   static function createWebImage(Request $request,Model $model,$forceValidation=true):?string{
     
     /// Validate The Images Input
     $v=ImageController::imageValidation($request,$forceValidation);
@@ -39,6 +39,7 @@ class ImageController extends Controller
      }catch(Exception $e){
         return parent::EM($e->getMessage());
     }
+    return null;
 }
 
    static function imageValidation(request $request,$required=true){

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\ShararaControllers\Traits;
 
-use App\Http\Controllers\statics\Firestore\FirestoreDBController;
+use App\Http\Controllers\statics\Firestore\FirebaseServerConnecterController;
+use App\Models\RoyalBoardModel\RoyalBoardModel;
 use App\Models\System\Notifications\NotificationModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,7 @@ trait FBNotificationsUtilsTrait {
         $metadata = null,
         $type = "general",
         $notificationModel = NotificationModel::class,
-    ) : string | null {
+    ) : string | RoyalBoardModel {
       if( $type == "general" ){
         $notification = new $notificationModel();
         $notification->title = $title;
@@ -32,14 +33,16 @@ trait FBNotificationsUtilsTrait {
         if($saver)return $saver;
         $class = new $model;
         $ms = $class::where('notification',1);
-        return Self::handleNotificationSending(
-            FirestoreDBController::messaging(),
+        $sender= Self::handleNotificationSending(
+            FirebaseServerConnecterController::messaging(),
             $ms,
             $title,
             $body,
             $notification->fullResponse(),
             $type
         );
+        if($sender)return $sender;
+        return $notification;
       }
 
       else if ($model instanceof Model){
@@ -52,22 +55,26 @@ trait FBNotificationsUtilsTrait {
         $notification->model_id = $model->id;
         $saver = $notification->saver();
         if($saver)return $saver;
-        return Self::handleNotificationSending(
-            FirestoreDBController::messaging(),
+        $sender =  Self::handleNotificationSending(
+            FirebaseServerConnecterController::messaging(),
             $model,
             $title,
             $body,
             $notification->fullResponse(),
             $type
         );
+        if($sender)return $sender;
+        return $notification;
       }
       else if($model instanceof Builder){
+        $noti = null;
         $model->chunk(499,function ($collection) use (
             &$notificationModel,
             &$title,
             &$body,
             &$type,
             &$metadata,
+            &$noti,
         ){
 
             foreach($collection as $m){
@@ -80,8 +87,9 @@ trait FBNotificationsUtilsTrait {
             $notification->model_id = $m->id;
             $saver = $notification->saver();
             if($saver)return $saver;
+            if($noti==null)$noti = $notification;
             Self::handleNotificationSending(
-                FirestoreDBController::messaging(),
+                FirebaseServerConnecterController::messaging(),
                 $m,
                 $title,
                 $body,
@@ -92,7 +100,7 @@ trait FBNotificationsUtilsTrait {
             
         });
       }
-      return null;
+      return $noti;
     }
 
     static public function handleNotificationSending(
@@ -102,7 +110,7 @@ trait FBNotificationsUtilsTrait {
         $body,
         $data = null,
         $type = "general",
-    ){
+    ) :string | null{
         $tokens = [];
 
         if(is_array($models)){
@@ -132,7 +140,7 @@ trait FBNotificationsUtilsTrait {
                     $type
                 );
             });
-            return;
+            return null;
         }
         else if ($models instanceof Model){
            if($models->fcm==null)return "fcm is null";
@@ -146,6 +154,8 @@ trait FBNotificationsUtilsTrait {
             $data,
             $type
         );
+        return null;
+
     }
 
 
