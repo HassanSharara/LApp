@@ -39,13 +39,13 @@ use App\Http\Controllers\Files\Image\ImageController;
                                         <td>{{$counter++}}</td>
                                         <td>{{$obj->title}}</td>
                                         <?php 
-                                         $images  = $obj->images;
-                                        ?>
-                                        <td> 
-                                            @if(!empty($images))
-                                            <img class="img-responsive imgcover" src="{{asset(ImageController::$uploadPath.'/'.$obj->images->first()->path)}}">                                            
-                                            @endif
-                                        </td>
+                                        $image  = $obj->images->first();
+                                       ?>
+                                       <td> 
+                                           @if($image!=null)
+                                           <img class="img-responsive imgcover" src="{{asset(ImageController::$uploadPath.'/'.$image->path)}}">                                            
+                                           @endif
+                                       </td>
                                         <td>{{$obj->body}}</td>
                                         <td><a href="{{Route('edit_notifications',['id'=>$obj->id])}}" class="btn btn-primary">تعديل</a></td>
                                         <td><a href="{{Route('delete_notifications',['id'=>$obj->id])}}" class="btn btn-danger">حذف</a></td>
