@@ -30,6 +30,16 @@
 
                                         </ul>
                                     </li>
+
+                                    <li class="dropdown">
+                                        <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                                                data-feather="list"></i><span> البانرات </span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="nav-link" href="{{Route('create_banner')}}">انشاء بانر جديد </a></li>
+                                            <li><a class="nav-link" href="{{Route('banners')}}">جميع البانرات</a></li>
+
+                                        </ul>
+                                    </li>
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
                                                 data-feather="bell"></i><span>الاشعارات </span></a>

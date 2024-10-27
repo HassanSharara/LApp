@@ -41,13 +41,3 @@ Route::group(['prefix' => 'categories'], function () {
 });
 
 
-
-/// SubCategories
-Route::group(["prefix"=>"subcategory"],function(){
-    Route::post('/all/{id}',[SubCategoryApiController::class,'index']);
-});
-
-/// orders
-Route::group(["prefix"=>"orders"],function(){
-    Route::post('/create',[OrdersApiController::class,'createOrder']);
-});

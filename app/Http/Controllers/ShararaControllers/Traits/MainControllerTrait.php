@@ -127,6 +127,10 @@ trait QueryFilterTrati {
                  $this->orWhereHandler($model,$value);
                  break;    
 
+                case "orwherenull" :
+                 $this->orWhereHandler($model,$value);
+                 break;    
+
 
                 case "distinct" :
                  $this->distinct($model,$value);
@@ -136,8 +140,24 @@ trait QueryFilterTrati {
     }
 
 
+    private function orWhereNull(&$model,&$data){
+        foreach ($data as $map){
+            $root = $map->root;
+            if(property_exists($root,"children") && is_array($root->children) && !isEmpty($root->children)){
+             $model->orWhereNull(function ($m) use ($root){
+                $m->orWhereNull($root->column);
+                foreach($root->children as $querycb){
+                    $this->handleDecodedMessage($m,$querycb);
+                }
+             });   
+            } else {
+              $model->orWhereNull($root->column);
+            }
+       }
+    }
+
+
     private function whereNullHandler(&$model,&$data){
-        error_log("where null invoked");
         foreach ($data as $map){
             $root = $map->root;
             if(property_exists($root,"children") && is_array($root->children) && !isEmpty($root->children)){

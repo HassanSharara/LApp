@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\Appwebmonitr\AppWebMonitorController;
+use App\Http\Controllers\Web\Banner\BannerWebController;
 use App\Http\Controllers\Web\Category\CategoryController;
 use App\Http\Controllers\Web\City\CityController;
 use App\Http\Controllers\Web\Country\CountryController;
@@ -103,3 +104,15 @@ Route::group(["prefix"=>"notifications"],function(){
     Route::post("edit/{id}",[NotificationsWebController::class,'edit'])->name('edit_notifications');
     Route::get("delete/{id}",[NotificationsWebController::class,'delete'])->name('delete_notifications');
 });
+
+
+/// Categories 
+Route::group(['prefix'=>'banners'],function(){
+    Route::get('',[BannerWebController::class,'index'])->name('banners');
+    Route::get('create',[BannerWebController::class,'create'])->name('create_banner');
+    Route::post('create',[BannerWebController::class,'create'])->name('create_banner_post');
+    Route::get('edit/{id}',[BannerWebController::class,'edit'])->name('edit_banner');
+    Route::post('edit/{id}',[BannerWebController::class,'edit'])->name('edit_banner_post');
+    Route::get('delete/{id}',[BannerWebController::class,'delete'])->name('delete_banner');
+});
+

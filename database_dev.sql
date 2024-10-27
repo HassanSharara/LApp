@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2024 at 05:35 PM
+-- Generation Time: Aug 20, 2024 at 01:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `dev`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banners`
+--
+
+CREATE TABLE `banners` (
+  `id` int(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `t` int(11) NOT NULL DEFAULT 0,
+  `action_type` varchar(200) DEFAULT NULL,
+  `metadata` varchar(500) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `banners`
+--
+
+INSERT INTO `banners` (`id`, `title`, `description`, `t`, `action_type`, `metadata`, `created_at`, `updated_at`) VALUES
+(5, NULL, NULL, 0, NULL, NULL, '2024-08-15 12:31:08', '2024-08-15 12:31:08'),
+(6, NULL, NULL, 0, NULL, NULL, '2024-08-15 12:32:19', '2024-08-15 12:32:19');
 
 -- --------------------------------------------------------
 
@@ -182,7 +207,8 @@ INSERT INTO `image` (`id`, `type`, `father_model`, `path`, `created_at`, `update
 (92, 'category', '24', 'image_category_f203c5ef7fbba2c0810c5bdfb3203094.png', '2023-07-09 23:57:50', '2023-07-09 23:57:50'),
 (95, 'category', '20', 'image_category_84a541d8bb7808a1c44e659df584033b.png', '2023-07-10 00:04:10', '2023-07-10 00:04:10'),
 (96, 'category', '12', 'image_category_d0c04c893a221673eb5b9f3528cbe419.png', '2023-07-10 00:05:08', '2023-07-10 00:05:08'),
-(97, 'category', '28', 'image_category_f46bb1a9d3fdf5e85006c28328dd57e9.jpg', '2024-05-17 16:57:58', '2024-05-17 16:57:58');
+(97, 'category', '28', 'image_category_f46bb1a9d3fdf5e85006c28328dd57e9.jpg', '2024-05-17 16:57:58', '2024-05-17 16:57:58'),
+(103, 'notifications', '8', 'image_notifications_e3520e3b15809340394de4815c03cf13.png', '2024-07-19 10:35:10', '2024-07-19 10:35:10');
 
 -- --------------------------------------------------------
 
@@ -201,6 +227,13 @@ CREATE TABLE `notifications` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `model_type`, `model_id`, `title`, `body`, `type`, `metadata`, `created_at`, `updated_at`) VALUES
+(8, NULL, NULL, 'tat', 'body', 'general', NULL, '2024-07-19 10:26:53', '2024-07-19 10:36:14');
 
 -- --------------------------------------------------------
 
@@ -277,6 +310,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `banners`
+--
+ALTER TABLE `banners`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -346,6 +385,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `banners`
+--
+ALTER TABLE `banners`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -367,13 +412,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `shop`
