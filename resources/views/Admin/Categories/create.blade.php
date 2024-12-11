@@ -20,6 +20,10 @@ action="{{
                         <label>اسم التخصص</label>
                         <input type="text" value="{{$model->name??""}}" name="name" class="form-control">
                     </div>
+
+                    @if (isset($id) && !isset($model))
+                     <input type="hidden" value="{{$id}}" name="father_id" class="form-control">
+                    @endif
                     <br>
                     <div class="form-group">
                         <label>قوة ظهور القسم</label>

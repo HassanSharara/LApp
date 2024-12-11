@@ -33,11 +33,11 @@ $modelExist = isset($model);
 
                     <br>
                     <?php 
-                    $image = $model->images->first();
+                    $image = isset($model) ? $model->images->first() : null;
                     ?>
                     <div class="from-group">
                         
-                    @if(!empty($images))
+                    @if($image != null)
                         <label>تبديل صورة القسم</label>
                        <br>
                         <td><img class="img-responsive imgcover" src="{{asset(ImageController::$uploadPath.'/'.$image->path)}}">

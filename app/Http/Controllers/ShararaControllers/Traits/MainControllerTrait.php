@@ -29,8 +29,8 @@ use function PHPUnit\Framework\isEmpty;
             "error"=>$message
         ]);
     }
-    static function SM($e,$route=null){
-        if($route!=null)$redirect= redirect()->route($route);
+    static function SM($e,$route=null,$data=null){
+        if($route!=null)$redirect= redirect()->route($route,$data);
         else $redirect=redirect()->back();
         return $redirect->with(
             [ "success"=>$e]

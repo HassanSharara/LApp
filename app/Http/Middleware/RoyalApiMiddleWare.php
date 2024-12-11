@@ -17,7 +17,9 @@ class RoyalApiMiddleWare extends RoyalApiController
      */
     public function handle(Request $request, Closure $next)
     {
-        
+              
+        $data = $this->_reWriteRequest($request);
+        if(!$data)return $this->notAUth("you are not authorized"); 
        if(isset($this->customer)) return $next($request);
        return "error";
     }

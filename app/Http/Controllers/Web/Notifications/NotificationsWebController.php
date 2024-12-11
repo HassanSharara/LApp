@@ -6,8 +6,11 @@ use App\Http\Controllers\Files\Image\ImageController;
 use App\Http\Controllers\Types\RoyalWebController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ShararaControllers\Traits\FBNotificationsUtilsTrait;
+use App\Models\System\Actions\AdminAction;
+use App\Models\System\Category\Category;
 use App\Models\System\Customer\Customer;
 use App\Models\System\Notification\NotificationModel;
+use Illuminate\Support\Facades\DB;
 
 class NotificationsWebController extends RoyalWebController
 {
@@ -15,10 +18,16 @@ class NotificationsWebController extends RoyalWebController
     protected string $viewPath = "Admin.Notifications.";
 
 
-    public function all(){
-        $model = NotificationModel::where('type','general')->orderBy('created_at','desc')
-        ->paginate();
-        return $this->render("all",['model'=>$model]);
+    public function all(request $request){
+        $model = NotificationModel::where('type','general')->orderBy('created_at','desc');
+        $id = $request->get('id');
+        if($id != null) {
+            $category = Category::find($id);
+            if ( $category != null ) {
+                $model=  $model->where('father_id',$id);
+            }
+        }
+        return $this->render("all",['model'=>$model->paginate()]);
     }
 
 
@@ -27,6 +36,7 @@ class NotificationsWebController extends RoyalWebController
         if($request->isMethod("GET"))return $this->render("create");
         $title = $request->get('title');
         $body = $request->get('body');
+        DB::beginTransaction();
         $sender = FBNotificationsUtilsTrait::createAndSendNotification(
             $title,
             $body,
@@ -38,6 +48,13 @@ class NotificationsWebController extends RoyalWebController
         if($request->hasFile('royal_image')){
             ImageController::createWebImage($request,$sender,false);
         }
+
+        if (is_string(AdminAction::registerAction($this->user(),$sender,"قام بانشاء اشعار". " ".$sender->title))){
+            return $this->EM("الخدمة متوقفة حالياً");
+            DB::rollBack();
+
+        }
+        DB::commit();
         return redirect(Route("all_notifications"))->with(
             [
                 "success"=>"تمت العملية بنجاح"

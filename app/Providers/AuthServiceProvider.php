@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use RoyalSettings;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $roles = RoyalSettings::AllRoles();
+
+        foreach ($roles as $r) {
+            $role = $r->id;
+            Gate::define($role,function (User $user) use ($role){
+                return $user->can_do($role);
+            });
+        }
     }
 }

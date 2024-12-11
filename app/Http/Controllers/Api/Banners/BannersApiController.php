@@ -16,4 +16,6 @@ class BannersApiController extends RoyalApiController
         $this->handleFilterRequest($request,$banners);
         return $this->SR('banners',$banners->paginate($this->ApiPagination));
     }
+
+    
 }

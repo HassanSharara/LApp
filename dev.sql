@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2024 at 01:17 PM
+-- Generation Time: Dec 11, 2024 at 11:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -18,8 +18,44 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dev`
+-- Database: `general_hospital`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_actions`
+--
+
+CREATE TABLE `admin_actions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `model_type` varchar(150) NOT NULL,
+  `model_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_actions`
+--
+
+INSERT INTO `admin_actions` (`id`, `user_id`, `model_type`, `model_id`, `description`, `created_at`, `updated_at`) VALUES
+(6, 1, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 06:40:27', '2024-12-06 06:40:27'),
+(7, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:05:42', '2024-12-06 07:05:42'),
+(8, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:06:24', '2024-12-06 07:06:24'),
+(9, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:07:42', '2024-12-06 07:07:42'),
+(10, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:08:57', '2024-12-06 07:08:57'),
+(11, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:10:11', '2024-12-06 07:10:11'),
+(12, 2, 'users', 2, 'تم التعديل على الادمن Azel Sharko', '2024-12-06 07:10:23', '2024-12-06 07:10:23'),
+(13, 1, 'category', 32, 'قام بتحديث بيانات الاقسام ', '2024-12-09 19:50:00', '2024-12-09 19:50:00'),
+(14, 1, 'category', 33, 'قام بتحديث بيانات الاقسام ', '2024-12-09 19:50:52', '2024-12-09 19:50:52'),
+(15, 1, 'category', 34, 'قام بتحديث بيانات الاقسام ', '2024-12-11 04:23:47', '2024-12-11 04:23:47'),
+(16, 1, 'category', 34, 'قام بتحديث بيانات الاقسام ', '2024-12-11 04:24:57', '2024-12-11 04:24:57'),
+(17, 1, 'category', 35, 'قام بتحديث بيانات الاقسام ', '2024-12-11 04:31:08', '2024-12-11 04:31:08'),
+(18, 1, 'category', 35, 'قام بحذف القسم csc', '2024-12-11 04:33:41', '2024-12-11 04:33:41'),
+(19, 1, 'category', 36, 'قام بتحديث بيانات الاقسام ', '2024-12-11 04:33:49', '2024-12-11 04:33:49');
 
 -- --------------------------------------------------------
 
@@ -37,14 +73,6 @@ CREATE TABLE `banners` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `banners`
---
-
-INSERT INTO `banners` (`id`, `title`, `description`, `t`, `action_type`, `metadata`, `created_at`, `updated_at`) VALUES
-(5, NULL, NULL, 0, NULL, NULL, '2024-08-15 12:31:08', '2024-08-15 12:31:08'),
-(6, NULL, NULL, 0, NULL, NULL, '2024-08-15 12:32:19', '2024-08-15 12:32:19');
 
 -- --------------------------------------------------------
 
@@ -69,12 +97,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `father_id`, `name`, `description`, `price`, `status`, `t`, `created_at`, `updated_at`) VALUES
-(12, NULL, 'خدمات تمريضية', NULL, NULL, 1, 10, '2023-06-05 15:24:11', '2023-07-01 08:29:47'),
-(20, NULL, 'العناية بالجروح', 'تساعد العناية الصحيحة بالجروح على حماية الجسم من العدوى ويمكنها تسريع الشفاء .  تطبيق ممرضي في خدمتك وسيكون معك منذ بداية العلاج حتى الوصول الى الشفاء التام وانت في المنزل .', NULL, 1, 8, '2023-06-06 21:19:32', '2023-06-06 21:20:46'),
-(21, NULL, 'تحاليل طبية', 'يوفر تطبيق ممرضي سحب جميع انواع العينات من المنزل بوجود كادر طبي متميز .', NULL, 1, 7, '2023-06-07 08:33:33', '2023-07-09 18:56:55'),
-(23, NULL, 'قسطره بولية', 'وذلك لضمان راحتك أكثر  تركيب الفولي أصبح اسهل واسرع مع تطبيق ممرضي , وأنت في المنزل نضمن لك تركيب الفولي بدقه وبدون مضاعفات', NULL, 1, 7, '2023-06-08 08:56:15', '2023-06-08 08:57:46'),
-(24, NULL, 'حجامة عامة', 'ال', NULL, 1, 4, '2023-07-01 08:47:04', '2023-07-08 11:18:10'),
-(28, '20', 'test', '0', 10, 1, 10, '2024-05-17 16:57:58', '2024-05-17 16:57:58');
+(32, NULL, 'test', NULL, NULL, 1, 0, '2024-12-09 19:50:00', '2024-12-09 19:50:00'),
+(33, NULL, 'test2', NULL, NULL, 1, 2, '2024-12-09 19:50:52', '2024-12-09 19:50:52'),
+(34, '33', 'children', '123', NULL, 1, 2, '2024-12-11 04:23:47', '2024-12-11 04:24:57'),
+(36, '33', 'بشسبي', NULL, NULL, 1, 1, '2024-12-11 04:33:49', '2024-12-11 04:33:49');
 
 -- --------------------------------------------------------
 
@@ -166,7 +192,7 @@ INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `password`, `google_id`
 (1, 'اوس راسم جميل', 'test3@gmail.com', '07715623061', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTcyXC9Sb3lhbEpvYlwvcHVibGljXC9TZWNyZXRSb3lhbEZpcnN0ZXJcL2xvZ2luIiwiaWF0IjoxNjQ3NDIxMjM3LCJleHAiOjE2NDc0MjQ4MzcsIm5iZiI6MTY0NzQyMTIzNywianRpIjoiRDE4SVNOTmptUWt1MU9HQSIsInN1YiI6ImN1c3RvbWVyczQzYjUzNTVlMmY5YjFiYjY3NjFjMzM4ZjY2ODE5OTMzX1JveWFsQm9hcmQiLCJwcnYiOiI4MjJkZjIwZWExZjA3NTcwNzEzNTgxYzI3MjI4ZWE0ZGUyZTZlNWFmIn0.URIS2rGgYCaYXBbOTo1TcI7vKQtpySJbgwL0vS6xlW0', '2021-10-17 21:59:23', '2022-03-16 19:00:37', 1, 'dHHCoh0zQK25XrDn9wLeSy:APA91bER_z0HZOTdcDIzMfLSFb1PUMzQrI-mP6L2KvQQ4Nzd3nb1TuvRitINGWpOgB-CZZHAGdIhvvH8M3h3WZnc9haXsgGv6YMuewp28FtC9OGJPZVARFpERkEpwh3zHUKW7JxYEoyy', 1, NULL),
 (2, ' محمد راسم جميل', 'test1@gmail.com', '078534234520', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL215X2dvbGRcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9sb2dpbiIsImlhdCI6MTY1MDA1MTU0NiwiZXhwIjoxNjUwMDU1MTQ2LCJuYmYiOjE2NTAwNTE1NDYsImp0aSI6ImdJQ1Bzb3pvS0VoajRlVTEiLCJzdWIiOiJjdXN0b21lcnM0M2I1MzVmc2RmZjliMWJiNjc2MWMzMzhmNjY4MTk5MzNfUm95YWxCb2FyZCIsInBydiI6IjUzYTJjYjEyZDZlNTEyZDY3OGRhNGU5YzE0MWE0YWI5MTYxM2E4YjcifQ.OEaon5ZPHhzQ-EWD_6Z7D11YXzlrraRElKV_YuyprsI', '2021-10-17 21:59:23', '2022-04-16 02:39:06', 1, 'dHHCoh0zQK25XrDn9wLeSy:APA91bER_z0HZOTdcDIzMfLSFb1PUMzQrI-mP6L2KvQQ4Nzd3nb1TuvRitINGWpOgB-CZZHAGdIhvvH8M3h3WZnc9haXssdfgGv6YMuewp28FtC9OGJPZVARFpERkEpwh3zHUKW7JxYEoyy', 1, NULL),
 (3, 'Azel Mohammed', 'ft47fc@gmail.com', '+9642', '$2y$10$DbSy/FLWM6r9JDbDZSjmk.TDgaHb6FwxXw8ld75vNcpCmkuosAI/2', '', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTkwXC9kZXZcL2dlbmVyYWxcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9sb2dpbiIsImlhdCI6MTcxODA3Mzc2NSwiZXhwIjoxNzE4MDc3MzY1LCJuYmYiOjE3MTgwNzM3NjUsImp0aSI6IklMQldKYnY3WVFldVBhcjYiLCJzdWIiOjMsInBydiI6IjUzYTJjYjEyZDZlNTEyZDY3OGRhNGU5YzE0MWE0YWI5MTYxM2E4YjcifQ.PXjWG1W9MNV7LoN76wsWLU38e2BY5HrJiGvkR8AFMZw', '2022-04-14 04:28:54', '2024-06-10 23:42:45', 1, NULL, 1, 'https://lh3.googleusercontent.com/a-/AOh14GgaSDdX9f3k-WbS0B1RfimvyYoxcKETEbAA98yH=s96-c'),
-(10, 'test', NULL, '+9647807832184', '$2y$10$4QsRtiNgyYUs7gGj2qvkx.EZOgImp4l/uWPZqE0Czp647kyqzipHK', NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjAuMTkwXC9kZXZcL2dlbmVyYWxcL3B1YmxpY1wvUm95YWxGaXJzdGVyXC9mb3JnZXQiLCJpYXQiOjE3MTgwNzM5MDYsImV4cCI6MTcxODA3NzUwNiwibmJmIjoxNzE4MDczOTA2LCJqdGkiOiJWblAzS0g4U0FHMkhmc2hpIiwic3ViIjoxMCwicHJ2IjoiNTNhMmNiMTJkNmU1MTJkNjc4ZGE0ZTljMTQxYTRhYjkxNjEzYThiNyJ9.HiY7vYcaxGkhRQz2wwHhuPxcfoS4b63st3Z0HTnCfLI', '2024-06-10 23:43:37', '2024-06-10 23:45:06', 1, NULL, 1, NULL);
+(10, 'test', NULL, '+9647807832184', '$2y$10$4QsRtiNgyYUs7gGj2qvkx.EZOgImp4l/uWPZqE0Czp647kyqzipHK', NULL, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4wLjE5MS9kZXYvcHJvamVjdHMvZ2VuZXJhbF9ob3NwaXRhbC9wdWJsaWMvUm95YWxGaXJzdGVyL2xvZ2luIiwiaWF0IjoxNzMzNzM5OTE1LCJleHAiOjE3MzM3NDM1MTUsIm5iZiI6MTczMzczOTkxNSwianRpIjoiQ2xZaDNZZDJiZTBnZ1BERCIsInN1YiI6IjEwIiwicHJ2IjoiNTNhMmNiMTJkNmU1MTJkNjc4ZGE0ZTljMTQxYTRhYjkxNjEzYThiNyJ9.QTYumLcD-1Xe5V4UvRPxUNPJLAWiLgowGVyY4hqxj-Q', '2024-06-10 23:43:37', '2024-12-09 07:25:15', 1, 'c4dgbufmRqmjPHJad1-isq:APA91bEU3-WwQIoQJylkAJdOSREjoYU8zUbcRGCHFsGvSoWCzqF9G4Upy6mkuUPLEE9oUj_hZj6Q-vErYOdV8Zw5iNnBHdqI3pN5eF7ierVF35oOf9rKJeg', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,15 +226,12 @@ INSERT INTO `image` (`id`, `type`, `father_model`, `path`, `created_at`, `update
 (58, 'subcategory', '21', 'image_subcategory_7d21299c3d227e5c8b4fc04ccdd163c5.png', '2023-07-02 20:45:39', '2023-07-02 20:45:39'),
 (59, 'subcategory', '12', 'image_subcategory_da60533882e00d41f1d359b5fea89235.png', '2023-07-02 20:46:43', '2023-07-02 20:46:43'),
 (62, 'subcategory', '29', 'image_subcategory_f7c2395b1d57859c106616a1ce513455.png', '2023-07-02 20:50:56', '2023-07-02 20:50:56'),
-(71, 'category', '23', 'image_category_bdb84626317677cbfa72874de4862042.png', '2023-07-07 21:17:50', '2023-07-07 21:17:50'),
 (73, 'subcategory', '15', 'image_subcategory_6cee16374dbfe9bc047458bf85938074.png', '2023-07-07 21:28:16', '2023-07-07 21:28:16'),
 (74, 'subcategory', '28', 'image_subcategory_be7e25241cdc15c63c123077e6c8773a.png', '2023-07-07 21:29:27', '2023-07-07 21:29:27'),
-(83, 'category', '21', 'image_category_1d0da484eda2dbda643dd80813df2d4f.png', '2023-07-09 19:54:20', '2023-07-09 19:54:20'),
-(92, 'category', '24', 'image_category_f203c5ef7fbba2c0810c5bdfb3203094.png', '2023-07-09 23:57:50', '2023-07-09 23:57:50'),
-(95, 'category', '20', 'image_category_84a541d8bb7808a1c44e659df584033b.png', '2023-07-10 00:04:10', '2023-07-10 00:04:10'),
-(96, 'category', '12', 'image_category_d0c04c893a221673eb5b9f3528cbe419.png', '2023-07-10 00:05:08', '2023-07-10 00:05:08'),
-(97, 'category', '28', 'image_category_f46bb1a9d3fdf5e85006c28328dd57e9.jpg', '2024-05-17 16:57:58', '2024-05-17 16:57:58'),
-(103, 'notifications', '8', 'image_notifications_e3520e3b15809340394de4815c03cf13.png', '2024-07-19 10:35:10', '2024-07-19 10:35:10');
+(108, 'category', '32', 'image_category_c7172c6a9b619d1486af2f6d1f2735c0.png', '2024-12-09 19:50:00', '2024-12-09 19:50:00'),
+(109, 'category', '33', 'image_category_c9a346268b5f55015b614312dc6c6e59.png', '2024-12-09 19:50:52', '2024-12-09 19:50:52'),
+(110, 'category', '34', 'image_category_8ae0493c3ec3992a70d338d9a77ab6b1.png', '2024-12-11 04:23:47', '2024-12-11 04:23:47'),
+(112, 'category', '36', 'image_category_178501bc57ed29f7a4f92c011cb6e6d6.png', '2024-12-11 04:33:49', '2024-12-11 04:33:49');
 
 -- --------------------------------------------------------
 
@@ -227,13 +250,6 @@ CREATE TABLE `notifications` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `model_type`, `model_id`, `title`, `body`, `type`, `metadata`, `created_at`, `updated_at`) VALUES
-(8, NULL, NULL, 'tat', 'body', 'general', NULL, '2024-07-19 10:26:53', '2024-07-19 10:36:14');
 
 -- --------------------------------------------------------
 
@@ -284,16 +300,42 @@ CREATE TABLE `shop` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `model_type` varchar(500) NOT NULL DEFAULT 'company',
+  `model_id` int(11) NOT NULL DEFAULT 0,
+  `type` tinyint(4) NOT NULL,
+  `amount` double NOT NULL,
+  `amount_currency` varchar(20) NOT NULL,
+  `to_model_type` varchar(250) NOT NULL DEFAULT 'company',
+  `to_model_id` int(11) NOT NULL DEFAULT 0,
+  `reason` varchar(500) NOT NULL DEFAULT 'transaction',
+  `description` text NOT NULL,
+  `payment_by` varchar(200) NOT NULL DEFAULT 'wallet',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `is_super` tinyint(4) NOT NULL DEFAULT 0,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`roles`)),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -302,12 +344,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'test', 'test1@gmail.com', NULL, '$2y$10$51Og.gbRiagp1bXOghSKMu/t3lLblJf9Mfp7pEQAffZi70z/GxFjO', 'KKZvpPNvS7V5SxvTEeNajk1fE0EXzVaVg2EmtahKRiSJhjHAqcTJuuRcTzfg', '2022-04-02 22:27:08', '2022-04-02 22:27:08');
+INSERT INTO `users` (`id`, `is_super`, `name`, `email`, `phone`, `status`, `email_verified_at`, `password`, `remember_token`, `roles`, `created_at`, `updated_at`) VALUES
+(1, 0, 'super', 'test1@gmail.com', '+964XXXXXXXXXX', 1, NULL, '$2y$10$51Og.gbRiagp1bXOghSKMu/t3lLblJf9Mfp7pEQAffZi70z/GxFjO', 'NnHXOssKHYY8S4l1COGmhAUrfkxor43sOHcvzRGGzTVXLArCUBPkIRgRRohf', '[\"all_admin\",\"notifications\"]', '2022-04-02 22:27:08', '2024-12-06 06:23:03'),
+(2, 0, 'Azel Sharkos', 'test3@gmail.com', '07807832184', 1, NULL, '$2y$10$3.rMdiT6iD2I7TdFX1v5QeUS4HcO61e89XW0x5XrLxV4Q28AqQoca', NULL, '[\"all_admin\"]', '2024-12-06 06:40:27', '2024-12-06 07:31:49');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_actions`
+--
+ALTER TABLE `admin_actions`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `banners`
@@ -374,27 +423,40 @@ ALTER TABLE `shop`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `is_super` (`is_super`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `admin_actions`
+--
+ALTER TABLE `admin_actions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -412,13 +474,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `shop`
@@ -427,10 +489,16 @@ ALTER TABLE `shop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

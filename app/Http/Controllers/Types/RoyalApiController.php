@@ -27,4 +27,14 @@ class RoyalApiController extends ApiFunctionsController
     function responseCatchError(){
         return $this->eToast(parent::$RoyalCatchEror);
     }
+
+    
+    public function refreshedCustomer($toast="تم التحديث بنجاح"){
+        $this->customer->refresh();
+        return $this->SR(
+            'update_user',
+            $this->customer->fullResponse(),
+            $toast
+        );
+    }
 }

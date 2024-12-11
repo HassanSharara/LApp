@@ -19,12 +19,12 @@ class RoyalFirstRequest extends ApiFunctionsController
      */
     public function handle(Request $request, Closure $next)
     {
+       
+        $data = $this->_reWriteRequest($request);
+        if(!$data)return $this->notAUth("you are not authorized");
         $token=$request->bearerToken();
         if($token==$this->secretToken)return $next($request);
-
         if(Customer::where('api_token',$token)->first()!=null)return $next($request);
-
-
         return $this->notAUth();
 
         

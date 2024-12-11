@@ -10,7 +10,7 @@
 
         <div class="dropdown-title">مرحبا <?php echo e(\Illuminate\Support\Facades\Auth::user()->name); ?></div>
                 <div class="dropdown-divider"></div>
-                <a class="" href=""
+                <a class="" href="{{Route('edit_profile')}}"
                ><i class="fas fa-sign-out-alt"></i>
                      تعديل ملفك الشخصي
                 </a>

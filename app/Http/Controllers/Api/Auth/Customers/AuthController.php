@@ -63,9 +63,6 @@ class AuthController extends ApiFunctionsController
     
 
     function login(request $request){
-
-
-        return $this->eToast("test");
         $v=$this->standardValidation($request->all(),['phone','password'],'eToast');
         if($v)return $v;
         return $this->loginProccess($request);
@@ -88,7 +85,7 @@ class AuthController extends ApiFunctionsController
         $auth=auth($this->RoyalApiGuard);
         $token=$auth->attempt($request->only('phone','password'));
         if($token==null)return $this->eToast("البريد الالكتروني او كلمة السر غير صحيحات");
-        $customer= $auth->user();
+        $customer = $auth->user() ;
         $customer->api_token=$token;
         if($customer->save())return $this->SR("auth",$customer->fullResponse(),"تم تسجيل الدخول بنجاح");
        }catch(Exception $e){

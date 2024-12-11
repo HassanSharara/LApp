@@ -21,34 +21,54 @@
 
                                         </ul>
                                     </li> -->
+                                   @can("categories")
+                                   <li class="dropdown">
+                                    <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                                            data-feather="list"></i><span>التخصصات والاقسام</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="{{Route('create_category')}}">انشاء تخصص جديد </a></li>
+                                        <li><a class="nav-link" href="{{Route('categories')}}">جميع التخصصات</a></li>
+
+                                    </ul>
+                                </li>
+                                   @endcan
+
+                                    @can("banners")
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                                data-feather="list"></i><span>التخصصات والاقسام</span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="nav-link" href="{{Route('create_category')}}">انشاء تخصص جديد </a></li>
-                                            <li><a class="nav-link" href="{{Route('categories')}}">جميع التخصصات</a></li>
-
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown">
-                                        <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                                data-feather="list"></i><span> البانرات </span></a>
+                                                data-feather="maximize"></i><span> البانرات </span></a>
                                         <ul class="dropdown-menu">
                                             <li><a class="nav-link" href="{{Route('create_banner')}}">انشاء بانر جديد </a></li>
                                             <li><a class="nav-link" href="{{Route('banners')}}">جميع البانرات</a></li>
 
                                         </ul>
                                     </li>
+
+                                    @endcan
+
+                                   @can("notifications")
+                                   <li class="dropdown">
+                                    <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                                            data-feather="bell"></i><span>الاشعارات </span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="{{Route('create_notifications')}}">انشاء اشعار جديد </a></li>
+                                        <li><a class="nav-link" href="{{Route('all_notifications')}}">جميع الاشعارات</a></li>
+
+                                    </ul>
+                                    </li>
+                                   @endcan
+
+
+                                    @can("roles")
                                     <li class="dropdown">
                                         <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                                                data-feather="bell"></i><span>الاشعارات </span></a>
+                                                data-feather="users"></i><span>الموظفين  </span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="nav-link" href="{{Route('create_notifications')}}">انشاء اشعار جديد </a></li>
-                                            <li><a class="nav-link" href="{{Route('all_notifications')}}">جميع الاشعارات</a></li>
+                                            <li><a class="nav-link" href="{{Route('all_employees')}}">جميع الموظفين</a></li>
 
                                         </ul>
-                                    </li>
+                                    </li> 
+                                    @endcan
                                     <!-- <li class="dropdown">
                 <a href="{{Route('app_monitor')}}" class="nav-link"><i data-feather="monitor"></i><span>نظام مراقبة الاخطاء</span></a>
 

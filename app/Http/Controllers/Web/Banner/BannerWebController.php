@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Web\Banner;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Files\Image\ImageController;
 use App\Http\Controllers\Types\RoyalWebController;
+use App\Models\System\Actions\AdminAction;
 use App\Models\System\Banners\BannersModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BannerWebController extends RoyalWebController
 {
@@ -39,13 +41,23 @@ class BannerWebController extends RoyalWebController
     }
     function delete(request $request,$id){
         $model=BannersModel::find($id);
-        if($model!=null) if($model->fullRemoving())return parent::SM("تم الحذف بنجاح" );
+        DB::beginTransaction();
+       if( $model!=null && $model->fullRemoving()) {
+           if(!is_string(AdminAction::registerAction($this->user(),$model,"قام بحذف البانر  ".$model->title??"")) ) {
+            DB::commit();
+            return parent::SM("تم الحذف بنجاح" );
+           }
+          
+        }
+
+        DB::rollBack();
        return parent::EM(parent::$requestError);
     }
 
     function saveModel(Request $request,$model=null){
         $i=$request->all();
         $isCreating = $model == null;
+        DB::beginTransaction();
         if($isCreating)$model= new BannersModel();
         try{
             $model->title=$request->get("title");
@@ -81,11 +93,16 @@ class BannerWebController extends RoyalWebController
                 }
 
                 if($image)return $image;
+                AdminAction::registerAction($this->user(),$model,'قام بتحديث بيانات البانر');
+                DB::commit();
                 return parent::SM('تمت العملية بنجاح','banners');
             }
         }catch(Exception $e){
+            DB::rollBack();
             return $e->getMessage();
         }
+
+        DB::rollBack();
         return parent::EM(parent::$RoyalCatchEror);
     }
 }

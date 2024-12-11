@@ -2,6 +2,7 @@
 
 namespace App\Models\RoyalBoardModel;
 
+use App\Http\Controllers\Files\Image\ImageController;
 use App\Models\Files\Image\Image;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,8 +15,9 @@ use Illuminate\Support\Facades\Hash;
 class RoyalBoardModel extends Model
 {
   protected $hasImage = false;
-  use HasFactory;
   protected $RCH = [];
+
+  use HasFactory;
     function images(){
         if($this->hasImage==false)return [];
         return $this->hasMany(Image::class,'father_model')->where('type',$this->getTable());
@@ -64,6 +66,16 @@ class RoyalBoardModel extends Model
 
 
     public function saver():string|null{return $this->RoyalModelSaving();}
+
+
+    public function getImagePath():?string {
+      $image = $this->images()->first();
+      if($image!=null){
+        
+        return asset(ImageController::$uploadPath."/".$image->path);
+      }
+      return null;
+    }
     public function RoyalModelSaving():string|null{
       try{
         $this->save();
